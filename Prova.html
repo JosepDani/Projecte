@@ -11,10 +11,10 @@
 		var posY = 100;
 		var keyState = {};
 
-
 		window.onload = function() {
 			canvas = document.getElementById('gameCanvas');
 			canvasContext = canvas.getContext('2d');
+
 			gameLoop();
 			
 		}
@@ -23,7 +23,6 @@
 		//CALCUL POSICIO QUADRAT
 
 		//https://stackoverflow.com/questions/12273451/how-to-fix-delay-in-javascript-keydown
-
 		window.addEventListener('keydown',function(e){
     		keyState[e.keyCode || e.which] = true;
 		},true);    
