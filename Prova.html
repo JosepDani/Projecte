@@ -6,19 +6,58 @@
 		var canvas;
 		var canvasContext;
 		var MIDAQUADRAT = 15; 
-		var deltapos = 4; //Augment de la posicio cada interval si esta clicant
+		var DELTAPOS = 2; //Augment de la posicio cada interval si esta clicant
 		var posX = 100;
 		var posY = 100;
 		var keyState = {};
 
+		class quadrat {
+
+			constructor(x, y) {
+				this._x = x;
+				this._y = y;
+			}
+
+			dibuix() {
+				colorRect(this._x, this._y, MIDAQUADRAT, MIDAQUADRAT, 'white');
+			}
+
+			set x (x) {
+				this._x = x;
+			}
+
+			set y (y) {
+				this._y = y;
+			}
+
+			get x() {
+				return this._x;
+			}
+
+			get y() {
+				return this._y;
+			}
+
+		}
+
 		window.onload = function() {
 			canvas = document.getElementById('gameCanvas');
 			canvasContext = canvas.getContext('2d');
-
+			heroi = new quadrat(posX, posY);
 			gameLoop();
-			
 		}
 
+		function gameLoop() {
+		    drawEverything();
+		    mouTot();
+		    setTimeout(gameLoop, 10);
+		}
+
+		//MOU TOT
+
+		function mouTot() {
+			mouQuadrat();
+		}
 
 		//CALCUL POSICIO QUADRAT
 
@@ -30,22 +69,19 @@
    	 		keyState[e.keyCode || e.which] = false;
 		},true);
 
-		function gameLoop() {
-		    if (keyState[37]) posX -= deltapos;
-			if (keyState[38]) posY -= deltapos;
-			if (keyState[39]) posX += deltapos;
-			if (keyState[40]) posY += deltapos;
-		    
-		    drawEverything();
-		    setTimeout(gameLoop, 10);
-
+		function mouQuadrat() {
+			if (keyState[37]) heroi.x = heroi.x - DELTAPOS;
+			if (keyState[38]) heroi.y = heroi.y - DELTAPOS;
+			if (keyState[39]) heroi.x = heroi.x + DELTAPOS;
+			if (keyState[40]) heroi.y = heroi.y + DELTAPOS;
 		}
 
+		
 		//DIBUIX DEL CANVAS
 		function drawEverything() {
 			canvasContext.fillStyle = 'black';
 			canvasContext.fillRect(0,0, canvas.width, canvas.height);
-			colorRect(posX, posY, MIDAQUADRAT, MIDAQUADRAT, 'white');
+			heroi.dibuix();
 		}
 
 		function colorRect(posX, posY, width, height, color) {
@@ -54,4 +90,5 @@
 		}
 
 	</script>
+
 </html>
