@@ -1,0 +1,39 @@
+<html>
+	<canvas id="gameCanvas" width="800"
+	height="600"></canvas>
+
+	<script type="text/javascript">
+		var canvas;
+		var canvasContext;
+		var MIDAQUADRAT = 10;
+
+		window.onload = function() {
+			canvas = document.getElementById('gameCanvas');
+			canvasContext = canvas.getContext('2d');
+		    
+			setInterval(function() {
+	            drawEverything();
+			}, 15);
+		}
+
+		//CALCUL POSICIO QUADRAT
+
+		function calculapos() {
+			
+		}
+
+
+		//DIBUIX DEL CANVAS
+		function drawEverything() {
+			canvasContext.fillStyle = 'black';
+			canvasContext.fillRect(0,0, canvas.width, canvas.height);
+			colorRect(100, 100, MIDAQUADRAT, MIDAQUADRAT, 'white');
+		}
+
+		function colorRect(posX, posY, width, height, color) {
+   			canvasContext.fillStyle = color;
+   		 	canvasContext.fillRect(posX, posY, width, height);
+		}
+
+	</script>
+</html>
