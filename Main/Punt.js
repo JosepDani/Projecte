@@ -1,13 +1,9 @@
 
-class Quadrat {
-
+class Punt {
+	
 	constructor(x, y) {
 		this._x = x;
 		this._y = y;
-	}
-
-	dibuix() {
-		colorRect(this._x, this._y, MIDAQUADRAT, MIDAQUADRAT, 'white');
 	}
 
 	set x (x) {

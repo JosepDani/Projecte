@@ -1,30 +1,21 @@
-package Main;
 
-class quadrat {
+class Quadrat {
 
-	constructor(x, y) {
-		this._x = x;
-		this._y = y;
+	constructor() {
+		this._p = new Punt(0,0);
 	}
 
 	dibuix() {
-		colorRect(this._x, this._y, MIDAQUADRAT, MIDAQUADRAT, 'white');
+		colorRect(this._p.x, this._p.y, MIDAQUADRAT, MIDAQUADRAT, 'white');
 	}
 
-	set x (x) {
-		this._x = x;
+	set p(p) {
+		this._p.x = p.x;
+		this._p.y = p.y;
 	}
 
-	set y (y) {
-		this._y = y;
-	}
-
-	get x() {
-		return this._x;
-	}
-
-	get y() {
-		return this._y;
+	get p() {
+		return this._p;
 	}
 
 }
