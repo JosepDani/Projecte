@@ -15,13 +15,8 @@
 		window.onload = function() {
 			canvas = document.getElementById('gameCanvas');
 			canvasContext = canvas.getContext('2d');
-		    
-		    /*
-			setInterval(function() {
-	            drawEverything();
-			}, 1000);
-			*/
 			gameLoop();
+			
 		}
 
 
@@ -35,32 +30,6 @@
 		window.addEventListener('keyup',function(e){
    	 		keyState[e.keyCode || e.which] = false;
 		},true);
-
-		/*function mouQuadrat() {
-
-			if (keyState[37]) posX -= deltapos;
-			if (keyState[38]) posY -= deltapos;
-			if (keyState[39]) posX += deltapos;
-			if (keyState[40]) posY += deltapos;
-			
-			/*keyID = e.keyCode;
-			console.log(keyID + " " + posY + " " + posX);
-
-			switch(keyID) {
-				case :
-					posX -= deltapos;
-					break;
-				case 38:
-					posY -= deltapos;
-					break;
-				case 39:
-					posX += deltapos;
-					break;
-				case 40:
-					posY += deltapos;
-					break;
-			}
-		}*/
 
 		function gameLoop() {
 		    if (keyState[37]) posX -= deltapos;
