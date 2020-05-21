@@ -1,0 +1,208 @@
+<html>
+
+<canvas id="gameCanvas" width="800"
+height="600"></canvas>
+
+<script>
+var canvas;
+var canvasContext;
+var ballX = 400;
+var ballY = 300;
+var movX = 4;
+var movY = 5;
+const midaPan = 100;
+var paddle2Y = 250;
+var player1S = 0;
+var player2S = 0;
+var deltaY = 0;
+const WS = 3;
+var showWS = false;
+var oriol = 0;
+
+
+window.onload = function() {
+	canvas = document.getElementById('gameCanvas');
+	canvasContext = canvas.getContext('2d');
+    const img = new Image()
+    img.src = "https://blocmat.files.wordpress.com/2013/02/oriol_serra_upc.jpg?w=611"
+    
+	setInterval(function() {
+        if (oriol < 140) {
+                canvasContext.fillStyle = 'black';
+                canvasContext.fillRect(0,0, canvas.width, canvas.height);
+                canvasContext.fillStyle = 'white';
+                canvasContext.font = "15pt Arial";
+                canvasContext.fillText("Juga amb l'oriol al igual que ell juga amb els vostres sentiments!",110,230)
+                canvasContext.drawImage(img, 70, 15, 140, 140, ballX - 50, ballY - 50, 100, 100);
+                oriol++;
+        }
+        else {
+                moveEverything();
+                drawEverything();
+        }
+	}, 15);
+    
+    canvas.addEventListener('mousemove',
+        function(evt) {
+            var mousePos = calculaMousPos(evt);
+            paddle1Y = mousePos.y;
+        });
+        
+        canvas.addEventListener('mousedown',handleMouseClick);
+                            
+}
+
+function computerMovement() {
+    var paddle2Center = paddle2Y + midaPan/2;
+    if(paddle2Center < ballY - 20 && paddle2Y < canvas.height - midaPan) {
+        paddle2Y += 7;
+    }
+    else if(paddle2Center > ballY + 20 && paddle2Y > 0) {
+        paddle2Y -= 7;
+    }
+}
+
+function handleMouseClick(evt) {
+    if(showWS) {
+        player1S = 0;
+        player2S = 0;
+        showWS = false;
+    }
+}
+
+function moveEverything() {
+    if(showWS) return;
+    computerMovement();
+    
+    if (ballX < 25 && ballX > 10) {
+        if(ballY > paddle1Y-midaPan/2 && ballY < paddle1Y+midaPan/2) {
+            movX = -movX;
+            deltaY = ballY - paddle1Y ;
+            if (deltaY > 200) deltaY = 200;
+            if (deltaY < -200) deltaY = -200;
+            movY = 1.3*Math.sqrt(Math.abs(deltaY))*(deltaY/Math.abs(deltaY));
+            if (movX < 13) {
+                movX += 1;
+            }
+        }
+    }
+    if (ballX > canvas.width - 25 && ballX < canvas.width - 10) {
+        if(ballY > paddle2Y && ballY < paddle2Y+midaPan) {
+            movX = -movX;
+            deltaY = ballY - paddle2Y - midaPan/2 ;
+            if (deltaY > 200) deltaY = 200;
+            if (deltaY < -200) deltaY = -200;
+            movY = 2*Math.sqrt(Math.abs(deltaY))*(deltaY/Math.abs(deltaY));
+            if (movX > - 13) {
+                movX -= 1;
+            }
+        }
+    }
+	if (ballX < 10) {
+        player2S++;
+        ballReset();
+	}
+	if (ballX > canvas.width - 10) {
+        player1S++;
+        ballReset();
+	}
+	if (ballY < 10) {
+		movY = -movY; 
+	}
+	if (ballY > canvas.height  - 10) {
+		movY = -movY;
+	}
+	ballX += movX;
+	ballY += movY;
+}
+
+function calculaMousPos(evt) {
+    var rect = canvas.getBoundingClientRect();
+    var root = document.documentElement;
+    var mouseX = evt.clientX - rect.left - root.scrollLeft;
+    var mouseY = evt.clientY - rect.top - root.scrollTop;
+    return {
+        x:mouseX, y:mouseY
+    };
+}
+
+function drawEverything() {
+	canvasContext.fillStyle = 'black';
+	canvasContext.fillRect(0,0, canvas.width, canvas.height);
+    if(showWS) {
+        canvasContext.fillStyle = 'white';
+        if (player1S >= WS) {
+            const img = new Image()
+            img.src = "https://blocmat.files.wordpress.com/2013/02/oriol_serra_upc.jpg?w=611"
+            canvasContext.font = "23pt Arial";
+            canvasContext.fillStyle = 'white';
+            canvasContext.drawImage(img, 70, 15, 140, 140, 350, 300, 100, 100);
+            canvasContext.fillText("Congrats! Ha guanyat l'Oriol, com sempre!",130,240);
+        }
+        else {
+            const img = new Image()
+            img.src = "https://blocmat.files.wordpress.com/2013/02/oriol_serra_upc.jpg?w=611"
+            canvasContext.font = "23pt Arial";
+            canvasContext.fillStyle = 'white';
+            canvasContext.drawImage(img, 70, 15, 140, 140, 350, 300, 130, 130);
+            canvasContext.fillText("Congrats! Ha guanyat l'Oriol, com sempre!",130,240);
+            
+        }
+        canvasContext.font = "9pt Arial";
+        canvasContext.fillText("Click to tornar a jugar",354,500)
+        return;
+    }
+    const img = new Image()
+    img.src = "https://blocmat.files.wordpress.com/2013/02/oriol_serra_upc.jpg?w=611"
+    
+    canvasContext.drawImage(img, 70, 15, 140, 140, ballX - 20, ballY - 20, 40, 40);
+
+    drawNet();
+    //esquerra
+    if (paddle1Y - midaPan/2 > 0 && paddle1Y + midaPan/2 < canvas.height) colorRect(5,paddle1Y - midaPan/2,15,midaPan,'white');
+    else if(paddle1Y - midaPan <= 0) colorRect(5,0,15,midaPan,'white');
+    else colorRect(5,canvas.height - midaPan,15,midaPan,'white');
+    //dreta
+    colorRect(canvas.width - 20, paddle2Y, 15, midaPan, 'white');
+    
+    //drawCircle(ballX, ballY, 10, 'white');
+    
+    canvasContext.fillText(player1S, 100, 100);
+    canvasContext.fillText(player2S, canvas.width - 100, 100);
+}
+
+function drawNet() {
+    for(var i = 0; i < canvas.height; i += 41.4) {
+        colorRect(canvas.width/2-1, i, 2, 20.7, 'white');
+    }
+}
+
+function drawCircle(centerX, centerY, radius, color) {
+    canvasContext.fillStyle = color;
+    canvasContext.beginPath();
+    canvasContext.arc(centerX, centerY, radius, 0, Math.PI*2, true);
+    canvasContext.fill();
+}
+
+function colorRect(posX, posY, width, height, color) {
+    canvasContext.fillStyle = color;
+    canvasContext.fillRect(posX, posY, width, height);
+}
+
+function ballReset() {
+    if(player1S >= WS || player2S >= WS) {
+        player1S = 0;
+        player2S = 0;
+        showWS = true;
+    }
+    
+    if (movX > 0) movX = 4;
+    else movX = -4;
+    movX = -movX;
+    ballX = canvas.width/2;
+    ballY = canvas.height/2;
+}
+
+</script>
+
+</html>
