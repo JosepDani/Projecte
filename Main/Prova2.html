@@ -7,6 +7,7 @@
 
 	<script src="Quadrat.js" type="text/javascript"></script>
 	<script src="Punt.js" type="text/javascript"></script>
+	<script src="Mapa.js" type="text/javascript"></script>
 
 	<script type="text/javascript">
 
@@ -25,27 +26,7 @@
 		var keyState = {};
 
 		window.onload = function() {
-			backgroundCanvas = document.getElementById('backgroundCanvas');
-			mapaCanvas = document.getElementById('mapaCanvas');
-			heroiCanvas = document.getElementById('heroiCanvas');
-			ctxb = backgroundCanvas.getContext('2d');
-			ctxm = mapaCanvas.getContext('2d');
-			ctxh = heroiCanvas.getContext('2d');
-
-			const backgroundimg = new Image();
-			backgroundimg.src = "https://images.designtrends.com/wp-content/uploads/2016/04/11094936/White-and-Grey-Grid-Pattern.jpg";
-			backgroundimg.onload = function() {ctxb.drawImage(backgroundimg,0,0,backgroundCanvas.width,backgroundCanvas.height);}
-			//es necessita el onload pq si no a vegades s'executa el drawImage() sense que es carregui
-			//la imatge i llavors no surt res pq no es torna a cridar drawImage()
-			ctxh.fillStyle = 'blue'; //aixo es del canvas de l'heroi pq vegis com es borra quan mous l'heroi
-			ctxh.fillRect(0,0,100,600);
-			ctxm.fillStyle = 'black'; //aixo es del context del mapa pq vegis com NO es borra
-			ctxm.fillRect(0,0,600,100);
-
-			ctxh.fillStyle = 'red'; //el fillStyle es defineix un cop i aixi no cal fer-ho a cada iteracio (no canvia)
-
-			heroi = new Quadrat();
-			heroi.p = new Punt(posX, posY);
+			inicialitza();
 			gameLoop();
 		}
 
@@ -83,13 +64,51 @@
 		//DIBUIX DEL CANVAS
 		function drawEverything() {
 			heroi.dibuix();
+			dibuixaMapa();
 		}
 
-		function colorRect(posX, posY, width, height) {
-			ctxh.clearRect(posX - MIDAQUADRAT/2, posY - MIDAQUADRAT/2, 30, 30);
-			// lo de -MIDAQUADRAT/2 es per fer que es borri millor
-   		ctxh.fillRect(posX, posY, width, height);
+		function dibuixaMapa() {
+			mapa = new Mapa();
+			mapa.zonaJoc = [new Punt(100, 100), new Punt(400, 400)];
+			mapa.zonaNoJoc = [new Punt(200, 200), new Punt(100, 100), new Punt(300, 300), new Punt(50, 50)];
+			mapa.dibuixa();
 		}
+
+		function colorRectHeroi(posX, posY, width, height) {
+			// lo de -MIDAQUADRAT/2 es per fer que es borri millor
+   			ctxh.fillRect(posX, posY, width, height);
+		}
+
+		function colorRectMapa(posX, posY, width, height) {
+			// lo de -MIDAQUADRAT/2 es per fer que es borri millor
+   			ctxm.fillRect(posX, posY, width, height);
+		}
+
+		//INICIALITZACIO DE COSES
+		function inicialitza() {
+			backgroundCanvas = document.getElementById('backgroundCanvas');
+			mapaCanvas = document.getElementById('mapaCanvas');
+			heroiCanvas = document.getElementById('heroiCanvas');
+			ctxb = backgroundCanvas.getContext('2d');
+			ctxm = mapaCanvas.getContext('2d');
+			ctxh = heroiCanvas.getContext('2d');
+
+			const backgroundimg = new Image();
+			backgroundimg.src = "https://images.designtrends.com/wp-content/uploads/2016/04/11094936/White-and-Grey-Grid-Pattern.jpg";
+			backgroundimg.onload = function() {ctxb.drawImage(backgroundimg,0,0,backgroundCanvas.width,backgroundCanvas.height);}
+			//es necessita el onload pq si no a vegades s'executa el drawImage() sense que es carregui
+			//la imatge i llavors no surt res pq no es torna a cridar drawImage()
+			ctxh.fillStyle = 'blue'; //aixo es del canvas de l'heroi pq vegis com es borra quan mous l'heroi
+			ctxh.fillRect(0,0,100,600);
+			ctxm.fillStyle = 'black'; //aixo es del context del mapa pq vegis com NO es borra
+			ctxm.fillRect(0,0,600,100);
+
+			ctxh.fillStyle = 'red'; //el fillStyle es defineix un cop i aixi no cal fer-ho a cada iteracio (no canvia)
+
+			heroi = new Quadrat();
+			heroi.p = new Punt(posX, posY);
+		}
+
 
 	</script>
 

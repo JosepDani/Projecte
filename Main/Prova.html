@@ -1,0 +1,71 @@
+<html>
+	<canvas id="gameCanvas" width="800"
+	height="600"></canvas>
+
+	<script src="Quadrat.js" type="text/javascript"></script>
+	<script src="Punt.js" type="text/javascript"></script>
+
+	<script type="text/javascript">
+
+		var canvas;
+		var canvasContext;
+		var MIDAQUADRAT = 15; 
+		var DELTAPOS = 2; //Augment de la posicio cada interval si esta clicant
+		var posX = 100;
+		var posY = 100;
+		var keyState = {};
+
+		window.onload = function() {
+			canvas = document.getElementById('gameCanvas');
+			canvasContext = canvas.getContext('2d');
+			heroi = new Quadrat();
+			heroi.p = new Punt(posX, posY);
+			gameLoop();
+		}
+
+		function gameLoop() {
+		    drawEverything();
+		    mouTot();
+		    setTimeout(gameLoop, 10);
+		}
+
+		//MOU TOT
+
+		function mouTot() {
+			mouQuadrat();
+		}
+
+		//CALCUL POSICIO QUADRAT
+
+		//https://stackoverflow.com/questions/12273451/how-to-fix-delay-in-javascript-keydown
+		window.addEventListener('keydown',function(e){
+    		keyState[e.keyCode || e.which] = true;
+		},true);    
+		window.addEventListener('keyup',function(e){
+   	 		keyState[e.keyCode || e.which] = false;
+		},true);
+
+		function mouQuadrat() {
+			p = new Punt(heroi.p.x, heroi.p.y);
+			if (keyState[37]) p.x = heroi.p.x - DELTAPOS;
+			if (keyState[38]) p.y = heroi.p.y - DELTAPOS;
+			if (keyState[39]) p.x = heroi.p.x + DELTAPOS;
+			if (keyState[40]) p.y = heroi.p.y + DELTAPOS;
+			heroi.p = p;
+		}
+		
+		//DIBUIX DEL CANVAS
+		function drawEverything() {
+			canvasContext.fillStyle = 'black';
+			canvasContext.fillRect(0,0, canvas.width, canvas.height);
+			heroi.dibuix();
+		}
+
+		function colorRect(posX, posY, width, height, color) {
+   			canvasContext.fillStyle = color;
+   		 	canvasContext.fillRect(posX, posY, width, height);
+		}
+
+	</script>
+
+</html>
