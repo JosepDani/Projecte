@@ -55,13 +55,13 @@
 
 		function mouQuadrat() {
 			p = new Punt(heroi.p.x, heroi.p.y);
-			if ((!heroi.estaTocantDE(mapa, DELTAPOS, MIDAQUADRAT) || !heroi.estaTocantBE(mapa, DELTAPOS, MIDAQUADRAT)) 
+			if ((!heroi.estaTocantDE(mapa, DELTAPOS, MIDAQUADRAT) || !heroi.estaTocantBE(mapa, DELTAPOS, MIDAQUADRAT))
 				&& keyState[37]) p.x = heroi.p.x - DELTAPOS;
-			if ((!heroi.estaTocantDD(mapa, DELTAPOS, MIDAQUADRAT) || !heroi.estaTocantDE(mapa, DELTAPOS, MIDAQUADRAT)) 
+			if ((!heroi.estaTocantDD(mapa, DELTAPOS, MIDAQUADRAT) || !heroi.estaTocantDE(mapa, DELTAPOS, MIDAQUADRAT))
 				&& keyState[38]) p.y = heroi.p.y - DELTAPOS;
-			if ((!heroi.estaTocantDD(mapa, DELTAPOS, MIDAQUADRAT) || !heroi.estaTocantBD(mapa, DELTAPOS, MIDAQUADRAT)) 
+			if ((!heroi.estaTocantDD(mapa, DELTAPOS, MIDAQUADRAT) || !heroi.estaTocantBD(mapa, DELTAPOS, MIDAQUADRAT))
 				&& keyState[39]) p.x = heroi.p.x + DELTAPOS;
-			if ((!heroi.estaTocantBD(mapa, DELTAPOS, MIDAQUADRAT) || !heroi.estaTocantBE(mapa, DELTAPOS, MIDAQUADRAT)) 
+			if ((!heroi.estaTocantBD(mapa, DELTAPOS, MIDAQUADRAT) || !heroi.estaTocantBE(mapa, DELTAPOS, MIDAQUADRAT))
 				&& keyState[40]) p.y = heroi.p.y + DELTAPOS;
 			heroi.p = p;
 		}
@@ -75,23 +75,21 @@
 			mapa = new Mapa();
 			mapa.zonaJoc = [new Punt(50, 200), new Punt(500, 200)];
 			//Aqui dibuixo les parts negres dins de la zonaJoc
-			mapa.zonaNoJoc = [new Punt(50, 200), new Punt(50, 70), 
-							  new Punt(50, 330), new Punt(50, 70), 
+			mapa.zonaNoJoc = [new Punt(50, 200), new Punt(50, 70),
+							  new Punt(50, 330), new Punt(50, 70),
 							  new Punt(200, 200), new Punt(50, 150),
 							  new Punt(400, 250), new Punt(50, 150),
-							  new Punt(500, 200), new Punt(50, 70), 
+							  new Punt(500, 200), new Punt(50, 70),
 							  new Punt(500, 330), new Punt(50, 70),
 							  new Punt(130, 240), new Punt(20, 20)];
 			mapa.dibuixa();
 		}
 
 		function colorRectHeroi(posX, posY, width, height) {
-			// lo de -MIDAQUADRAT/2 es per fer que es borri millor
    			ctxh.fillRect(posX, posY, width, height);
 		}
 
 		function colorRectMapa(posX, posY, width, height) {
-			// lo de -MIDAQUADRAT/2 es per fer que es borri millor
    			ctxm.fillRect(posX, posY, width, height);
 		}
 
