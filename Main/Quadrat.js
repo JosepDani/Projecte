@@ -28,7 +28,7 @@ class Quadrat {
 		for (var i = 0; i < mapa.zonaNoJoc.length - 1; i += 2) {
 			if (this._p.x - DELTAPOS < mapa.zonaNoJoc[i].x + mapa.zonaNoJoc[i + 1].x
 				&& this._p.y - DELTAPOS < mapa.zonaNoJoc[i].y + mapa.zonaNoJoc[i + 1].y
-				&& this._p.x + MIDAQUADRAT> mapa.zonaNoJoc[i].x
+				&& this._p.x + MIDAQUADRAT > mapa.zonaNoJoc[i].x
 				&& this._p.y + MIDAQUADRAT > mapa.zonaNoJoc[i].y) return true;
 		}
 		return false;

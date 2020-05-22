@@ -64,6 +64,7 @@
 			if ((!heroi.estaTocantBD(mapa, DELTAPOS, MIDAQUADRAT) || !heroi.estaTocantBE(mapa, DELTAPOS, MIDAQUADRAT))
 				&& keyState[40]) p.y = heroi.p.y + DELTAPOS;
 			heroi.p = p;
+			console.log(heroi.estaTocantDE(mapa,DELTAPOS,MIDAQUADRAT));
 		}
 
 		//DIBUIX DEL CANVAS
