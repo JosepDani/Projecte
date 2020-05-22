@@ -13,10 +13,18 @@ class Mapa {
 		this._zonaNoJoc = zonaNoJoc;
 	}
 
+	get zonaNoJoc() {
+		return this._zonaNoJoc;
+	}
+
+	get zonaJoc() {
+		return this._zonaJoc;
+	}
+
 	dibuixa() {
 		ctxm.fillStyle = 'green';
 		colorRectMapa(this._zonaJoc[0].x, this._zonaJoc[0].y, this._zonaJoc[1].x, this._zonaJoc[1].y);
-		ctxm.fillStyle = 'red';
+		ctxm.fillStyle = 'black';
 		for (var i = 0; i < this._zonaNoJoc.length - 1; i += 2) {
 			colorRectMapa(this._zonaNoJoc[i].x, this._zonaNoJoc[i].y, this._zonaNoJoc[i+1].x, this._zonaNoJoc[i+1].y);
 		}

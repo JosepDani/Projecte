@@ -21,8 +21,8 @@
 		var ctxh; //context de l'heroi
 		var MIDAQUADRAT = 15;
 		var DELTAPOS = 2; //Augment de la posicio cada interval si esta clicant
-		var posX = 0;
-		var posY = 0;
+		var posX = 60;
+		var posY = 295;
 		var keyState = {};
 
 		window.onload = function() {
@@ -43,7 +43,7 @@
 			mouQuadrat();
 		}
 
-		//CALCUL POSICIO QUADRAT
+		//MOU QUADRAT
 
 		//https://stackoverflow.com/questions/12273451/how-to-fix-delay-in-javascript-keydown
 		window.addEventListener('keydown',function(e){
@@ -55,11 +55,60 @@
 
 		function mouQuadrat() {
 			p = new Punt(heroi.p.x, heroi.p.y);
-			if (keyState[37]) p.x = heroi.p.x - DELTAPOS;
-			if (keyState[38]) p.y = heroi.p.y - DELTAPOS;
-			if (keyState[39]) p.x = heroi.p.x + DELTAPOS;
-			if (keyState[40]) p.y = heroi.p.y + DELTAPOS;
+			if ((!estaTocantDE() || !estaTocantBE()) && keyState[37]) p.x = heroi.p.x - DELTAPOS;
+			if ((!estaTocantDD() || !estaTocantDE()) && keyState[38]) p.y = heroi.p.y - DELTAPOS;
+			if ((!estaTocantDD() || !estaTocantBD()) && keyState[39]) p.x = heroi.p.x + DELTAPOS;
+			if ((!estaTocantBD() || !estaTocantBE()) && keyState[40]) p.y = heroi.p.y + DELTAPOS;
 			heroi.p = p;
+			console.log(estaTocantDD());
+		}
+
+		function estaTocantDE() {
+			if (heroi.p.y - DELTAPOS < mapa.zonaJoc[0].y
+				|| heroi.p.x - DELTAPOS < mapa.zonaJoc[0].x) return true;
+			for (var i = 0; i < mapa.zonaNoJoc.length - 1; i += 2) {
+				if (heroi.p.x - DELTAPOS < mapa.zonaNoJoc[i].x + mapa.zonaNoJoc[i + 1].x
+					&& heroi.p.y - DELTAPOS < mapa.zonaNoJoc[i].y + mapa.zonaNoJoc[i + 1].y
+					&& heroi.p.x + MIDAQUADRAT> mapa.zonaNoJoc[i].x
+					&& heroi.p.y + MIDAQUADRAT > mapa.zonaNoJoc[i].y) return true;
+			}
+			return false;
+		}
+		function estaTocantDD() {
+			if(heroi.p.x + MIDAQUADRAT + DELTAPOS > mapa.zonaJoc[0].x + mapa.zonaJoc[1].x
+				|| heroi.p.y - DELTAPOS < mapa.zonaJoc[0].y) return true;
+			for (var i = 0; i < mapa.zonaNoJoc.length - 1; i += 2) {
+				if (heroi.p.x + DELTAPOS + MIDAQUADRAT > mapa.zonaNoJoc[i].x
+					&& heroi.p.y - DELTAPOS < mapa.zonaNoJoc[i].y + mapa.zonaNoJoc[i + 1].y
+					&& heroi.p.y + MIDAQUADRAT > mapa.zonaNoJoc[i].y
+					&& heroi.p.x < mapa.zonaNoJoc[i].x + mapa.zonaNoJoc[i + 1].x) return true;
+			}
+			return false;
+		}
+
+		function estaTocantBE() {
+			if (heroi.p.x - DELTAPOS < mapa.zonaJoc[0].x
+				|| heroi.p.y + MIDAQUADRAT + DELTAPOS > mapa.zonaJoc[0].y + mapa.zonaJoc[1].y) return true;
+			for (var i = 0; i < mapa.zonaNoJoc.length - 1; i += 2) {
+				if (heroi.p.x - DELTAPOS < mapa.zonaNoJoc[i].x + mapa.zonaNoJoc[i + 1].x
+					&& heroi.p.y + DELTAPOS + MIDAQUADRAT > mapa.zonaNoJoc[i].y
+					&& heroi.p.x + MIDAQUADRAT > mapa.zonaNoJoc[i].x
+					&& heroi.p.y < mapa.zonaNoJoc[i].y + mapa.zonaNoJoc[i + 1].y
+					) return true;
+			}
+			return false;
+		}
+
+		function estaTocantBD() {
+			if (heroi.p.x + MIDAQUADRAT + DELTAPOS > mapa.zonaJoc[0].x + mapa.zonaJoc[1].x
+				|| heroi.p.y + MIDAQUADRAT + DELTAPOS > mapa.zonaJoc[0].y + mapa.zonaJoc[1].y) return true;
+			for (var i = 0; i < mapa.zonaNoJoc.length - 1; i += 2) {
+				if (heroi.p.x + DELTAPOS + MIDAQUADRAT > mapa.zonaNoJoc[i].x
+					&& heroi.p.y + DELTAPOS + MIDAQUADRAT > mapa.zonaNoJoc[i].y
+					&& heroi.p.x < mapa.zonaNoJoc[i].x + mapa.zonaNoJoc[i + 1].x
+					&& heroi.p.y < mapa.zonaNoJoc[i].y + mapa.zonaNoJoc[i + 1].y) return true;
+			}
+			return false;
 		}
 
 		//DIBUIX DEL CANVAS
@@ -69,8 +118,11 @@
 
 		function dibuixaMapa() {
 			mapa = new Mapa();
-			mapa.zonaJoc = [new Punt(100, 100), new Punt(400, 400)];
-			mapa.zonaNoJoc = [new Punt(200, 200), new Punt(100, 100), new Punt(300, 300), new Punt(50, 50)];
+			mapa.zonaJoc = [new Punt(50, 200), new Punt(500, 200)];
+			mapa.zonaNoJoc = [new Punt(50, 200), new Punt(50, 70), 
+							  new Punt(50, 330), new Punt(50, 70), 
+							  new Punt(200, 200), new Punt(50, 150),
+							  new Punt(400, 250), new Punt(50, 150)];
 			mapa.dibuixa();
 		}
 
