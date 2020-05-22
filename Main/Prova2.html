@@ -30,7 +30,6 @@
 
 		window.onload = function() {
 			inicialitza();
-			mapes = new Mapes();
 			dibuixaMapa();
 			gameLoop();
 		}
@@ -60,20 +59,24 @@
 		//Sembla molt farragos pero lunic que mira es si toquen les cantonades
 		function mouQuadrat() {
 			p = new Punt(heroi.p.x, heroi.p.y);
-			if ((!heroi.estaTocantDE(mapes.mapa(mapa), DELTAPOS, MIDAQUADRAT)
-				|| !heroi.estaTocantBE(mapes.mapa(mapa), DELTAPOS, MIDAQUADRAT))
-				&& keyState[37]) p.x = heroi.p.x - DELTAPOS;
-			if ((!heroi.estaTocantDD(mapes.mapa(mapa), DELTAPOS, MIDAQUADRAT)
-				|| !heroi.estaTocantDE(mapes.mapa(mapa), DELTAPOS, MIDAQUADRAT))
-				&& keyState[38]) p.y = heroi.p.y - DELTAPOS;
-			if ((!heroi.estaTocantDD(mapes.mapa(mapa), DELTAPOS, MIDAQUADRAT)
-				|| !heroi.estaTocantBD(mapes.mapa(mapa), DELTAPOS, MIDAQUADRAT))
-				&& keyState[39]) p.x = heroi.p.x + DELTAPOS;
-			if ((!heroi.estaTocantBD(mapes.mapa(mapa), DELTAPOS, MIDAQUADRAT)
-				|| !heroi.estaTocantBE(mapes.mapa(mapa), DELTAPOS, MIDAQUADRAT))
-				&& keyState[40]) p.y = heroi.p.y + DELTAPOS;
+			if (keyState[37] //esquerra
+				&& (!heroi.estaTocantDE(mapes.mapa(mapa), DELTAPOS, MIDAQUADRAT)
+				|| !heroi.estaTocantBE(mapes.mapa(mapa), DELTAPOS, MIDAQUADRAT)))
+				p.x = heroi.p.x - DELTAPOS;
+			if (keyState[38] //dalt
+				&& (!heroi.estaTocantDD(mapes.mapa(mapa), DELTAPOS, MIDAQUADRAT)
+				|| !heroi.estaTocantDE(mapes.mapa(mapa), DELTAPOS, MIDAQUADRAT)))
+				p.y = heroi.p.y - DELTAPOS;
+			if (keyState[39] //dreta
+				&& (!heroi.estaTocantDD(mapes.mapa(mapa), DELTAPOS, MIDAQUADRAT)
+				|| !heroi.estaTocantBD(mapes.mapa(mapa), DELTAPOS, MIDAQUADRAT)))
+				p.x = heroi.p.x + DELTAPOS;
+			if (keyState[40] //baix
+				&& (!heroi.estaTocantBD(mapes.mapa(mapa), DELTAPOS, MIDAQUADRAT)
+				|| !heroi.estaTocantBE(mapes.mapa(mapa), DELTAPOS, MIDAQUADRAT)))
+				p.y = heroi.p.y + DELTAPOS;
 			heroi.p = p;
-			console.log(heroi.estaTocantDE(mapa,DELTAPOS,MIDAQUADRAT));
+			//console.log(heroi.estaTocantDE(mapa,DELTAPOS,MIDAQUADRAT));
 		}
 
 		//DIBUIX DEL CANVAS
@@ -95,25 +98,29 @@
 
 		//INICIALITZACIO DE COSES
 		function inicialitza() {
-			backgroundCanvas = document.getElementById('backgroundCanvas');
-			mapaCanvas = document.getElementById('mapaCanvas');
-			heroiCanvas = document.getElementById('heroiCanvas');
-			ctxb = backgroundCanvas.getContext('2d');
-			ctxm = mapaCanvas.getContext('2d');
-			ctxh = heroiCanvas.getContext('2d');
-
-			const backgroundimg = new Image();
-			backgroundimg.src = "https://images.designtrends.com/wp-content/uploads/2016/04/11094936/White-and-Grey-Grid-Pattern.jpg";
-			backgroundimg.onload = function() {ctxb.drawImage(backgroundimg,0,0,backgroundCanvas.width,backgroundCanvas.height);}
-			//es necessita el onload pq si no a vegades s'executa el drawImage() sense que es carregui
-			//la imatge i llavors no surt res pq no es torna a cridar drawImage()
-			ctxm.fillStyle = 'black'; //aixo es del context del mapa pq vegis com NO es borra
-			ctxm.fillRect(0,0,600,600);
-
-			ctxh.fillStyle = 'red'; //el fillStyle es defineix un cop i aixi no cal fer-ho a cada iteracio (no canvia)
-
-			heroi = new Quadrat();
-			heroi.p = new Punt(posX, posY);
+			{//background
+				backgroundCanvas = document.getElementById('backgroundCanvas');
+				ctxb = backgroundCanvas.getContext('2d');
+				const backgroundimg = new Image();
+				backgroundimg.src = "https://images.designtrends.com/wp-content/uploads/2016/04/11094936/White-and-Grey-Grid-Pattern.jpg";
+				backgroundimg.onload = function() {ctxb.drawImage(backgroundimg,0,0,backgroundCanvas.width,backgroundCanvas.height);}
+				//es necessita el onload pq si no a vegades s'executa el drawImage() sense que es carregui
+				//la imatge i llavors no surt res pq no es torna a cridar drawImage()
+			}
+			{//mapa
+				mapaCanvas = document.getElementById('mapaCanvas');
+				ctxm = mapaCanvas.getContext('2d');
+				ctxm.fillStyle = 'black'; //aixo es del context del mapa pq vegis com NO es borra
+				ctxm.fillRect(0,0,600,600);
+				mapes = new Mapes();
+			}
+			{//Heroi
+				heroiCanvas = document.getElementById('heroiCanvas');
+				ctxh = heroiCanvas.getContext('2d');
+				ctxh.fillStyle = 'red'; //el fillStyle es defineix un cop i aixi no cal fer-ho a cada iteracio (no canvia)
+				heroi = new Quadrat();
+				heroi.p = new Punt(posX, posY);
+			}
 		}
 
 	</script>
