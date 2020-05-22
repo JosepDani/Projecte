@@ -63,6 +63,9 @@
 			console.log(estaTocantDD());
 		}
 
+		//DE = dalt esquerra and so on
+		//Vaig mirant cada cantonada si toca i a partir d'aixo decideixo si el quadrat es mou o no
+		//No et recomano que intentis entendre el codi, es un pal, nomes si vols fer algun canvi
 		function estaTocantDE() {
 			if (heroi.p.y - DELTAPOS < mapa.zonaJoc[0].y
 				|| heroi.p.x - DELTAPOS < mapa.zonaJoc[0].x) return true;
@@ -119,6 +122,7 @@
 		function dibuixaMapa() {
 			mapa = new Mapa();
 			mapa.zonaJoc = [new Punt(50, 200), new Punt(500, 200)];
+			//Aqui dibuixo les parts negres dins de la zonaJoc
 			mapa.zonaNoJoc = [new Punt(50, 200), new Punt(50, 70), 
 							  new Punt(50, 330), new Punt(50, 70), 
 							  new Punt(200, 200), new Punt(50, 150),
