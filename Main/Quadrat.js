@@ -20,6 +20,9 @@ class Quadrat {
 		return this._p;
 	}
 
+	//DE = dalt esquerra and so on
+	//Vaig mirant cada cantonada si toca i a partir d'aixo decideixo si el quadrat es mou o no
+	//No et recomano que intentis entendre el codi, es un pal, nomes si vols fer algun canvi
 	estaTocantDE(mapa, DELTAPOS, MIDAQUADRAT) {
 		if (this._p.y - DELTAPOS < mapa.zonaJoc[0].y
 			|| this._p.x - DELTAPOS < mapa.zonaJoc[0].x) return true;
