@@ -6,7 +6,7 @@ class Quadrat {
 	}
 
 	dibuix() {
-		colorRect(this._p.x, this._p.y, MIDAQUADRAT, MIDAQUADRAT, 'white');
+		colorRect(this._p.x, this._p.y, MIDAQUADRAT, MIDAQUADRAT);
 	}
 
 	set p(p) {
