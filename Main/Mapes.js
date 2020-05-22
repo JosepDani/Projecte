@@ -8,6 +8,8 @@ class Mapes {
 								 new Punt(500, 250), new Punt(50, 20)]; 
 		this._mapa1.infin = [new Punt(50, 100), new Punt(50, 60), 
 					  		 new Punt(500, 270), new Punt(50, 60)];
+		this._mapa1.pilotes = [new Pilota(new Punt(300, 300)),
+						new Pilota(new Punt(400, 400))]
 
 		this._mapa2 = new Mapa();
 		this._mapa2.zonaJoc = [new Punt(50, 200), new Punt(500, 200)];

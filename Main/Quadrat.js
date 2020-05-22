@@ -7,7 +7,10 @@ class Quadrat {
 
 	dibuix() {
 		ctxh.clearRect(this._p.x - MIDAQUADRAT/2, this._p.y - MIDAQUADRAT/2, 30, 30);
-		colorRectHeroi(this._p.x, this._p.y, MIDAQUADRAT, MIDAQUADRAT);
+		colorRectHeroi(this._p.x, this._p.y, MIDAQUADRAT + 2, MIDAQUADRAT + 2);
+		ctxh.fillStyle = 'yellow';
+		colorRectHeroi(this._p.x + 1, this._p.y + 1, MIDAQUADRAT, MIDAQUADRAT);
+		ctxh.fillStyle = 'red';
 	}
 
 	set p(p) {

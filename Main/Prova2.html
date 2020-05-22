@@ -3,6 +3,7 @@
 	<canvas id="backgroundCanvas" width="600" height="600" style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
 	<canvas id="mapaCanvas" width="600" height="600" style="position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
 	<canvas id="heroiCanvas" width="600" height="600" style="position: absolute; left: 0; top: 0; z-index: 2;"></canvas>
+	<canvas id="pilotaCanvas" width="600" height="600" style="position: absolute; left: 0; top: 0; z-index: 3;"></canvas>
 
 <!--el style es CSS i el z-index defineix en quina posicio esta el canvas, com mes alt, mes endevant esta (per sobre dels altres)-->
 
@@ -10,6 +11,7 @@
 	<script src="Punt.js" type="text/javascript"></script>
 	<script src="Mapa.js" type="text/javascript"></script>
 	<script src="Mapes.js" type="text/javascript"></script>
+	<script src="Pilota.js" type="text/javascript"></script>
 
 	<script type="text/javascript">
 
@@ -18,11 +20,14 @@
 		var backgroundCanvas;
 		var mapaCanvas;
 		var heroiCanvas;
+		var pilotesCanvas;
 		var ctxb; //context del background
 		var ctxm; //context del mapa
 		var ctxh; //context de l'heroi
+		var ctxp; //context pilotes
 		var MIDAQUADRAT = 15;
 		var DELTAPOS = 2; //Augment de la posicio cada interval si esta clicant
+		var RPILOTES = 5;
 		var posX = 60;
 		var posY = 295;
 		var keyState = {};
@@ -44,6 +49,7 @@
 
 		function mouTot() {
 			mouQuadrat();
+			mouPilotes();
 		}
 
 		//MOU QUADRAT
@@ -79,9 +85,14 @@
 			//console.log(heroi.estaTocantDE(mapa,DELTAPOS,MIDAQUADRAT));
 		}
 
+		function mouPilotes() {
+
+		}
+
 		//DIBUIX DEL CANVAS
 		function drawEverything() {
 			heroi.dibuix();
+			mapes.mapa(mapa).dibuixaPilotes();
 		}
 
 		function dibuixaMapa() {
@@ -94,6 +105,13 @@
 
 		function colorRectMapa(posX, posY, width, height) {
    			ctxm.fillRect(posX, posY, width, height);
+		}
+
+		function drawCircle(centerX, centerY, radius, color) {
+		    ctxp.fillStyle = color;
+		    ctxp.beginPath();
+		    ctxp.arc(centerX, centerY, radius, 0, Math.PI*2, true);
+		    ctxp.fill();
 		}
 
 		//INICIALITZACIO DE COSES
@@ -120,6 +138,10 @@
 				ctxh.fillStyle = 'red'; //el fillStyle es defineix un cop i aixi no cal fer-ho a cada iteracio (no canvia)
 				heroi = new Quadrat();
 				heroi.p = new Punt(posX, posY);
+			}
+			{
+				pilotaCanvas = document.getElementById('pilotaCanvas');
+				ctxp = pilotaCanvas.getContext('2d');
 			}
 		}
 

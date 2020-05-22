@@ -17,6 +17,10 @@ class Mapa {
 		this._infin = infin;
 	}
 
+	set pilotes(pilotes) {
+		this._pilotes = pilotes;
+	}
+
 	get zonaNoJoc() {
 		return this._zonaNoJoc;
 	}
@@ -27,6 +31,10 @@ class Mapa {
 
 	get infin() {
 		return this._infin;
+	}
+
+	get pilotes() {
+		this._pilotes = pilotes;
 	}
 
 	dibuixa() {
@@ -40,6 +48,14 @@ class Mapa {
 		for (var i = 0; i < 4; i += 2) {
 			colorRectMapa(this._infin[i].x, this._infin[i].y, this._infin[i+1].x, this._infin[i+1].y);
 		}
+	}
+
+	dibuixaPilotes() {
+		for (var i = 0; i < this._pilotes.length; i++) {
+			this._pilotes[i].dibuix();
+			console.log("hola");
+		}
+		console.log("adeu");
 	}
 
 }
