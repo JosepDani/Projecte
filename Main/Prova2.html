@@ -27,6 +27,7 @@
 
 		window.onload = function() {
 			inicialitza();
+			dibuixaMapa();
 			gameLoop();
 		}
 
@@ -64,7 +65,6 @@
 		//DIBUIX DEL CANVAS
 		function drawEverything() {
 			heroi.dibuix();
-			dibuixaMapa();
 		}
 
 		function dibuixaMapa() {
@@ -98,17 +98,14 @@
 			backgroundimg.onload = function() {ctxb.drawImage(backgroundimg,0,0,backgroundCanvas.width,backgroundCanvas.height);}
 			//es necessita el onload pq si no a vegades s'executa el drawImage() sense que es carregui
 			//la imatge i llavors no surt res pq no es torna a cridar drawImage()
-			ctxh.fillStyle = 'blue'; //aixo es del canvas de l'heroi pq vegis com es borra quan mous l'heroi
-			ctxh.fillRect(0,0,100,600);
 			ctxm.fillStyle = 'black'; //aixo es del context del mapa pq vegis com NO es borra
-			ctxm.fillRect(0,0,600,100);
+			ctxm.fillRect(0,0,600,600);
 
 			ctxh.fillStyle = 'red'; //el fillStyle es defineix un cop i aixi no cal fer-ho a cada iteracio (no canvia)
 
 			heroi = new Quadrat();
 			heroi.p = new Punt(posX, posY);
 		}
-
 
 	</script>
 
