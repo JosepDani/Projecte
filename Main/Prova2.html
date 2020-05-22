@@ -55,63 +55,15 @@
 
 		function mouQuadrat() {
 			p = new Punt(heroi.p.x, heroi.p.y);
-			if ((!estaTocantDE() || !estaTocantBE()) && keyState[37]) p.x = heroi.p.x - DELTAPOS;
-			if ((!estaTocantDD() || !estaTocantDE()) && keyState[38]) p.y = heroi.p.y - DELTAPOS;
-			if ((!estaTocantDD() || !estaTocantBD()) && keyState[39]) p.x = heroi.p.x + DELTAPOS;
-			if ((!estaTocantBD() || !estaTocantBE()) && keyState[40]) p.y = heroi.p.y + DELTAPOS;
+			if ((!heroi.estaTocantDE(mapa, DELTAPOS, MIDAQUADRAT) || !heroi.estaTocantBE(mapa, DELTAPOS, MIDAQUADRAT)) 
+				&& keyState[37]) p.x = heroi.p.x - DELTAPOS;
+			if ((!heroi.estaTocantDD(mapa, DELTAPOS, MIDAQUADRAT) || !heroi.estaTocantDE(mapa, DELTAPOS, MIDAQUADRAT)) 
+				&& keyState[38]) p.y = heroi.p.y - DELTAPOS;
+			if ((!heroi.estaTocantDD(mapa, DELTAPOS, MIDAQUADRAT) || !heroi.estaTocantBD(mapa, DELTAPOS, MIDAQUADRAT)) 
+				&& keyState[39]) p.x = heroi.p.x + DELTAPOS;
+			if ((!heroi.estaTocantBD(mapa, DELTAPOS, MIDAQUADRAT) || !heroi.estaTocantBE(mapa, DELTAPOS, MIDAQUADRAT)) 
+				&& keyState[40]) p.y = heroi.p.y + DELTAPOS;
 			heroi.p = p;
-			console.log(estaTocantDD());
-		}
-
-		//DE = dalt esquerra and so on
-		//Vaig mirant cada cantonada si toca i a partir d'aixo decideixo si el quadrat es mou o no
-		//No et recomano que intentis entendre el codi, es un pal, nomes si vols fer algun canvi
-		function estaTocantDE() {
-			if (heroi.p.y - DELTAPOS < mapa.zonaJoc[0].y
-				|| heroi.p.x - DELTAPOS < mapa.zonaJoc[0].x) return true;
-			for (var i = 0; i < mapa.zonaNoJoc.length - 1; i += 2) {
-				if (heroi.p.x - DELTAPOS < mapa.zonaNoJoc[i].x + mapa.zonaNoJoc[i + 1].x
-					&& heroi.p.y - DELTAPOS < mapa.zonaNoJoc[i].y + mapa.zonaNoJoc[i + 1].y
-					&& heroi.p.x + MIDAQUADRAT> mapa.zonaNoJoc[i].x
-					&& heroi.p.y + MIDAQUADRAT > mapa.zonaNoJoc[i].y) return true;
-			}
-			return false;
-		}
-		function estaTocantDD() {
-			if(heroi.p.x + MIDAQUADRAT + DELTAPOS > mapa.zonaJoc[0].x + mapa.zonaJoc[1].x
-				|| heroi.p.y - DELTAPOS < mapa.zonaJoc[0].y) return true;
-			for (var i = 0; i < mapa.zonaNoJoc.length - 1; i += 2) {
-				if (heroi.p.x + DELTAPOS + MIDAQUADRAT > mapa.zonaNoJoc[i].x
-					&& heroi.p.y - DELTAPOS < mapa.zonaNoJoc[i].y + mapa.zonaNoJoc[i + 1].y
-					&& heroi.p.y + MIDAQUADRAT > mapa.zonaNoJoc[i].y
-					&& heroi.p.x < mapa.zonaNoJoc[i].x + mapa.zonaNoJoc[i + 1].x) return true;
-			}
-			return false;
-		}
-
-		function estaTocantBE() {
-			if (heroi.p.x - DELTAPOS < mapa.zonaJoc[0].x
-				|| heroi.p.y + MIDAQUADRAT + DELTAPOS > mapa.zonaJoc[0].y + mapa.zonaJoc[1].y) return true;
-			for (var i = 0; i < mapa.zonaNoJoc.length - 1; i += 2) {
-				if (heroi.p.x - DELTAPOS < mapa.zonaNoJoc[i].x + mapa.zonaNoJoc[i + 1].x
-					&& heroi.p.y + DELTAPOS + MIDAQUADRAT > mapa.zonaNoJoc[i].y
-					&& heroi.p.x + MIDAQUADRAT > mapa.zonaNoJoc[i].x
-					&& heroi.p.y < mapa.zonaNoJoc[i].y + mapa.zonaNoJoc[i + 1].y
-					) return true;
-			}
-			return false;
-		}
-
-		function estaTocantBD() {
-			if (heroi.p.x + MIDAQUADRAT + DELTAPOS > mapa.zonaJoc[0].x + mapa.zonaJoc[1].x
-				|| heroi.p.y + MIDAQUADRAT + DELTAPOS > mapa.zonaJoc[0].y + mapa.zonaJoc[1].y) return true;
-			for (var i = 0; i < mapa.zonaNoJoc.length - 1; i += 2) {
-				if (heroi.p.x + DELTAPOS + MIDAQUADRAT > mapa.zonaNoJoc[i].x
-					&& heroi.p.y + DELTAPOS + MIDAQUADRAT > mapa.zonaNoJoc[i].y
-					&& heroi.p.x < mapa.zonaNoJoc[i].x + mapa.zonaNoJoc[i + 1].x
-					&& heroi.p.y < mapa.zonaNoJoc[i].y + mapa.zonaNoJoc[i + 1].y) return true;
-			}
-			return false;
 		}
 
 		//DIBUIX DEL CANVAS
