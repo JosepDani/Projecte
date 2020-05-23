@@ -36,6 +36,14 @@ class Mapa {
 	get pilotes() {
 		this._pilotes = pilotes;
 	}
+	
+	/*
+	mouPilotes() {
+		for (var i = 0; i < this._pilotes.length; i++) {
+			this._pilotes[i].mou();
+		}
+	}
+	*/
 
 	dibuixa() {
 		ctxm.fillStyle = 'green';

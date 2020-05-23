@@ -49,10 +49,10 @@
 
 		function mouTot() {
 			mouQuadrat();
-			mouPilotes();
+			//mapes.mapa(mapa).mouPilotes();
 		}
 
-		//MOU QUADRAT
+	  //MOU QUADRAT
 
 		//https://stackoverflow.com/questions/12273451/how-to-fix-delay-in-javascript-keydown
 		window.addEventListener('keydown',function(e){
@@ -64,29 +64,23 @@
 
 		//Sembla molt farragos pero lunic que mira es si toquen les cantonades
 		function mouQuadrat() {
-			p = new Punt(heroi.p.x, heroi.p.y);
 			if (keyState[37] //esquerra
 				&& (!heroi.estaTocantDE(mapes.mapa(mapa), DELTAPOS, MIDAQUADRAT)
 				|| !heroi.estaTocantBE(mapes.mapa(mapa), DELTAPOS, MIDAQUADRAT)))
-				p.x = heroi.p.x - DELTAPOS;
+				heroi.p.x = heroi.p.x - DELTAPOS;
 			if (keyState[38] //dalt
 				&& (!heroi.estaTocantDD(mapes.mapa(mapa), DELTAPOS, MIDAQUADRAT)
 				|| !heroi.estaTocantDE(mapes.mapa(mapa), DELTAPOS, MIDAQUADRAT)))
-				p.y = heroi.p.y - DELTAPOS;
+				heroi.p.y = heroi.p.y - DELTAPOS;
 			if (keyState[39] //dreta
 				&& (!heroi.estaTocantDD(mapes.mapa(mapa), DELTAPOS, MIDAQUADRAT)
 				|| !heroi.estaTocantBD(mapes.mapa(mapa), DELTAPOS, MIDAQUADRAT)))
-				p.x = heroi.p.x + DELTAPOS;
+				heroi.p.x = heroi.p.x + DELTAPOS;
 			if (keyState[40] //baix
 				&& (!heroi.estaTocantBD(mapes.mapa(mapa), DELTAPOS, MIDAQUADRAT)
 				|| !heroi.estaTocantBE(mapes.mapa(mapa), DELTAPOS, MIDAQUADRAT)))
-				p.y = heroi.p.y + DELTAPOS;
-			heroi.p = p;
+				heroi.p.y = heroi.p.y + DELTAPOS;
 			//console.log(heroi.estaTocantDE(mapa,DELTAPOS,MIDAQUADRAT));
-		}
-
-		function mouPilotes() {
-
 		}
 
 		//DIBUIX DEL CANVAS
