@@ -1,8 +1,8 @@
 
 class Quadrat {
 
-	constructor() {
-		this._p = new Punt(0,0);
+	constructor(posX, posY) {
+		this._p = new Punt(posX, posY);
 	}
 
 	dibuix() {

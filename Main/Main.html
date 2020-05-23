@@ -12,6 +12,7 @@
 	<script src="./Classes/Mapa.js" type="text/javascript"></script>
 	<script src="./Classes/Mapes.js" type="text/javascript"></script>
 	<script src="./Classes/Pilota.js" type="text/javascript"></script>
+	<script src="Trajectories.js" type="text/javascript"></script>
 
 	<script type="text/javascript">
 
@@ -122,8 +123,7 @@
 				heroiCanvas = document.getElementById('heroiCanvas');
 				ctxh = heroiCanvas.getContext('2d');
 				ctxh.fillStyle = 'red'; //el fillStyle es defineix un cop i aixi no cal fer-ho a cada iteracio (no canvia)
-				heroi = new Quadrat();
-				heroi.p = new Punt(posX, posY);
+				heroi = new Quadrat(posX, posY);
 			}
 			{//Pilota
 				pilotaCanvas = document.getElementById('pilotaCanvas');
