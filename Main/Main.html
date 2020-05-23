@@ -33,6 +33,7 @@
 		var posY = 295;
 		var keyState = {};
 		var mapa = 1;
+		var i = 0;
 
 		window.onload = function() {
 			inicialitza();
@@ -50,7 +51,8 @@
 
 		function mouTot() {
 			mouQuadrat();
-			//mapes.mapa(mapa).mouPilotes();
+			mapes.mapa(mapa).mouPilotes();
+			final();
 		}
 
 	  //MOU QUADRAT
@@ -129,6 +131,37 @@
 				pilotaCanvas = document.getElementById('pilotaCanvas');
 				ctxp = pilotaCanvas.getContext('2d');
 			}
+			mapaInicialitza(); // Esta aqui perque necessita l'heroi pero s'hauria de posar a dins del inmapa si es pogues
+		}
+
+		function mapaInicialitza() {
+			i = 0;
+			mapes = new Mapes();
+			ctxp.clearRect(0, 0, 600, 600);
+			ctxm.clearRect(0, 0, 600, 600);
+			ctxh.clearRect(0, 0, 600, 600);
+			heroi.p.x = mapes.mapa(mapa).infin[0].x + (mapes.mapa(mapa).infin[1].x/2) - MIDAQUADRAT/2;
+			heroi.p.y = mapes.mapa(mapa).infin[0].y + (mapes.mapa(mapa).infin[1].y)/2 - MIDAQUADRAT/2;
+			dibuixaMapa();
+
+		}
+
+		function final() {
+			var final = false;
+			if (heroi.p.x > mapes.mapa(mapa).infin[2].x && heroi.p.y > mapes.mapa(mapa).infin[2].y
+				&& heroi.p.x < mapes.mapa(mapa).infin[2].x + mapes.mapa(mapa).infin[3].x 
+				&& heroi.p.y < mapes.mapa(mapa).infin[2].y + mapes.mapa(mapa).infin[3].y) final = true;
+
+			if (final) {
+				i++;
+				if (i > 100) {
+					mapa++;
+					final = false;
+					mapaInicialitza();
+				}
+			}
+			console.log(i);
+
 		}
 
 	</script>

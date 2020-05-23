@@ -37,15 +37,17 @@ class Mapa {
 		this._pilotes = pilotes;
 	}
 
-	/*
+	
 	mouPilotes() {
 		for (var i = 0; i < this._pilotes.length; i++) {
 			this._pilotes[i].mou();
 		}
 	}
-	*/
+	
 
 	dibuixa() {
+		ctxm.fillStyle = 'black';
+		ctxm.fillRect(0,0,600,600);
 		ctxm.fillStyle = 'green';
 		ctxm.fillRect(this._zonaJoc[0].x, this._zonaJoc[0].y, this._zonaJoc[1].x, this._zonaJoc[1].y);
 		ctxm.fillStyle = 'black';
@@ -61,9 +63,7 @@ class Mapa {
 	dibuixaPilotes() {
 		for (var i = 0; i < this._pilotes.length; i++) {
 			this._pilotes[i].dibuix();
-			console.log("hola");
 		}
-		console.log("adeu");
 	}
 
 }
