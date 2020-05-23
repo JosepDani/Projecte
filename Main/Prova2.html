@@ -99,14 +99,6 @@
 			mapes.mapa(mapa).dibuixa();
 		}
 
-		function colorRectHeroi(posX, posY, width, height) {
-   			ctxh.fillRect(posX, posY, width, height);
-		}
-
-		function colorRectMapa(posX, posY, width, height) {
-   			ctxm.fillRect(posX, posY, width, height);
-		}
-
 		function drawCircle(centerX, centerY, radius, color) {
 		    ctxp.fillStyle = color;
 		    ctxp.beginPath();
@@ -139,7 +131,7 @@
 				heroi = new Quadrat();
 				heroi.p = new Punt(posX, posY);
 			}
-			{
+			{//Pilota
 				pilotaCanvas = document.getElementById('pilotaCanvas');
 				ctxp = pilotaCanvas.getContext('2d');
 			}
