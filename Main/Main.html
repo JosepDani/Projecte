@@ -34,6 +34,7 @@
 		var keyState = {};
 		var mapa = 1;
 		var i = 0;
+		var fin;
 
 		window.onload = function() {
 			inicialitza();
@@ -143,24 +144,22 @@
 			heroi.p.x = mapes.mapa(mapa).infin[0].x + (mapes.mapa(mapa).infin[1].x/2) - MIDAQUADRAT/2;
 			heroi.p.y = mapes.mapa(mapa).infin[0].y + (mapes.mapa(mapa).infin[1].y)/2 - MIDAQUADRAT/2;
 			dibuixaMapa();
-
+			fin = false;
 		}
 
 		function final() {
-			var final = false;
 			if (heroi.p.x > mapes.mapa(mapa).infin[2].x && heroi.p.y > mapes.mapa(mapa).infin[2].y
 				&& heroi.p.x < mapes.mapa(mapa).infin[2].x + mapes.mapa(mapa).infin[3].x 
-				&& heroi.p.y < mapes.mapa(mapa).infin[2].y + mapes.mapa(mapa).infin[3].y) final = true;
+				&& heroi.p.y < mapes.mapa(mapa).infin[2].y + mapes.mapa(mapa).infin[3].y) fin = true;
 
-			if (final) {
+			if (fin) {
 				i++;
 				if (i > 100) {
 					mapa++;
-					final = false;
+					fin = false;
 					mapaInicialitza();
 				}
 			}
-			console.log(i);
 
 		}
 
