@@ -10,7 +10,7 @@ class Pilota {
 	}
 
 	mou() {
-
+		//creare una subclasse per cada tipus de moviment i el mou sera un metode de la subclasse
 	}
 
 	dibuix() {
