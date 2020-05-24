@@ -39,20 +39,20 @@ class Mapa {
 
 
 	mouPilotes() {
-		for (var i = 0; i < this._pilotes.length; i++) {
+		for (let i = 0; i < this._pilotes.length; i++) {
 			this._pilotes[i].mou();
 		}
 	}
 
 	mataQuadrat(p) { //p es el !CENTRE! del quadrat
-		for (var i = 0; i < this._pilotes.length; i++) {
+		for (let i = 0; i < this._pilotes.length; i++) {
 			if (this._pilotes[i].mata(p)) return true;
 		}
 		return false;
 	}
 
 	dibuixaPilotes() {
-		for (var i = 0; i < this._pilotes.length; i++) {
+		for (let i = 0; i < this._pilotes.length; i++) {
 			this._pilotes[i].dibuix();
 		}
 	}
@@ -63,11 +63,11 @@ class Mapa {
 		ctxm.fillStyle = 'green';
 		ctxm.fillRect(this._zonaJoc[0].x, this._zonaJoc[0].y, this._zonaJoc[1].x, this._zonaJoc[1].y);
 		ctxm.fillStyle = 'black';
-		for (var i = 0; i < this._zonaNoJoc.length - 1; i += 2) {
+		for (let i = 0; i < this._zonaNoJoc.length - 1; i += 2) {
 			ctxm.fillRect(this._zonaNoJoc[i].x, this._zonaNoJoc[i].y, this._zonaNoJoc[i+1].x, this._zonaNoJoc[i+1].y);
 		}
 		ctxm.fillStyle = '#22F515';
-		for (var i = 0; i < 4; i += 2) {
+		for (let i = 0; i < 4; i += 2) {
 			ctxm.fillRect(this._infin[i].x, this._infin[i].y, this._infin[i+1].x, this._infin[i+1].y);
 		}
 	}
