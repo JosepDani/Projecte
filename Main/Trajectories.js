@@ -31,7 +31,6 @@ class Poligon extends Pilota {
   }
 
   mou() {
-    console.log('hola');
     this._p.x += this._vel.x;
     this._p.y += this._vel.y;
     if (Math.abs(this._p.x - this._Q[this._t].x) < 4 && Math.abs(this._p.y - this._Q[this._t].y) < 4) { //miro bastament primer
