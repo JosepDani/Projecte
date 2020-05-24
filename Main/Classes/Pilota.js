@@ -10,7 +10,6 @@ class Pilota {
 	}
 
 	dibuix() {
-		ctxp.clearRect(this._p.x - 2*RPILOTES, this._p.y - 2*RPILOTES, 2*RPILOTES, 2*RPILOTES);
 		drawCircle(this._p.x, this._p.y, RPILOTES, 'white');
 	}
 
