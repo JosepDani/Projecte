@@ -37,13 +37,25 @@ class Mapa {
 		this._pilotes = pilotes;
 	}
 
-	
+
 	mouPilotes() {
 		for (var i = 0; i < this._pilotes.length; i++) {
 			this._pilotes[i].mou();
 		}
 	}
-	
+
+	mataQuadrat(p) { //p es el !CENTRE! del quadrat
+		for (var i = 0; i < this._pilotes.length; i++) {
+			if (this._pilotes[i].mata(p)) return true;
+		}
+		return false;
+	}
+
+	dibuixaPilotes() {
+		for (var i = 0; i < this._pilotes.length; i++) {
+			this._pilotes[i].dibuix();
+		}
+	}
 
 	dibuixa() {
 		ctxm.fillStyle = 'black';
@@ -57,12 +69,6 @@ class Mapa {
 		ctxm.fillStyle = '#22F515';
 		for (var i = 0; i < 4; i += 2) {
 			ctxm.fillRect(this._infin[i].x, this._infin[i].y, this._infin[i+1].x, this._infin[i+1].y);
-		}
-	}
-
-	dibuixaPilotes() {
-		for (var i = 0; i < this._pilotes.length; i++) {
-			this._pilotes[i].dibuix();
 		}
 	}
 

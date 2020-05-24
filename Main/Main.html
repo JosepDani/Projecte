@@ -27,8 +27,10 @@
 		var WIDTH = 600;
 		var HEIGHT = 600;
 		var MIDAQUADRAT = 15;
-		var DELTAPOS = 2; //Augment de la posicio cada interval si esta clicant
+		var RQUADRAT = 9; //Mes o menys la mitjana entre el centre i una cantonada i el centre i un costat
 		var RPILOTES = 5;
+		var RMATAR = (RQUADRAT + RPILOTES)**2; //potser es innecessari pero facilita els calculs
+		var DELTAPOS = 2; //Augment de la posicio cada interval si esta clicant
 		var posX = 60;
 		var posY = 295;
 		var keyState = {};
@@ -44,6 +46,7 @@
 		function gameLoop() {
 		    drawEverything();
 		    mouTot();
+				mata();
 		    setTimeout(gameLoop, 10);
 		}
 
@@ -90,6 +93,11 @@
 		function drawEverything() {
 			heroi.dibuix();
 			mapes.mapa(mapa).dibuixaPilotes();
+		}
+
+		function mata() {
+			let p = new Punt(heroi.p.x + MIDAQUADRAT/2, heroi.p.y + MIDAQUADRAT/2);
+			if (mapes.mapa(mapa).mataQuadrat(p)) mapaInicialitza();
 		}
 
 		function drawCircle(centerX, centerY, radius, color) {

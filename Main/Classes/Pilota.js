@@ -14,12 +14,11 @@ class Pilota {
 		drawCircle(this._p.x, this._p.y, RPILOTES, 'white');
 	}
 
-	detecta() {
-		//aixo sera un metode per veure si toca el quadrat, que funciona per totes les subclasses
-	}
-
-	mou() {
-		//aixo en realitat hauria de ser un metode de la subclasse, per cada subclasse sera diferent
+	mata(p) { //p es el !CENTRE! del quadrat
+		if ((p.x-this._p.x)**2 + (p.y-this._p.y)**2 < RMATAR) {
+			return true;
+		}
+		return false;
 	}
 
 }
