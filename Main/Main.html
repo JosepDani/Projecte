@@ -46,7 +46,7 @@
 		function gameLoop() {
 		    drawEverything();
 		    mouTot();
-				mata();
+			mata();
 		    setTimeout(gameLoop, 10);
 		}
 
@@ -92,6 +92,7 @@
 		//DIBUIX DEL CANVAS
 		function drawEverything() {
 			heroi.dibuix();
+			ctxp.clearRect(0, 0, 600, 600);
 			mapes.mapa(mapa).dibuixaPilotes();
 		}
 
