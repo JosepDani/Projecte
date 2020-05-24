@@ -15,8 +15,10 @@ class Pilota {
 	}
 
 	mata(p) { //p es el !CENTRE! del quadrat
-		if ((p.x-this._p.x)**2 + (p.y-this._p.y)**2 < RMATAR) {
-			return true;
+		if (Math.abs(p.x - this._p.x) < RMATAR && Math.abs(p.y - this._p.y) < RMATAR) { //miro bastament primer
+			if ((p.x-this._p.x)**2 + (p.y-this._p.y)**2 < RMATAR) { //faig calcul mes precis
+				return true;
+			}
 		}
 		return false;
 	}
