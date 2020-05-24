@@ -10,7 +10,8 @@ class Pilota {
 	}
 
 	dibuix() {
-		drawCircle(this._p.x, this._p.y, RPILOTES, 'white');
+		c.drawCircle(this._p.x, this._p.y, RPILOTES + 1, 'blue');
+		c.drawCircle(this._p.x, this._p.y, RPILOTES, 'white');
 	}
 
 	mata(p) { //p es el !CENTRE! del quadrat
