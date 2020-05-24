@@ -16,8 +16,6 @@
 
 	<script type="text/javascript">
 
-		var WIDTH = 600;
-		var HEIGHT = 600;
 		var backgroundCanvas;
 		var mapaCanvas;
 		var heroiCanvas;
@@ -26,6 +24,8 @@
 		var ctxm; //context del mapa
 		var ctxh; //context de l'heroi
 		var ctxp; //context pilotes
+		var WIDTH = 600;
+		var HEIGHT = 600;
 		var MIDAQUADRAT = 15;
 		var DELTAPOS = 2; //Augment de la posicio cada interval si esta clicant
 		var RPILOTES = 5;
@@ -38,7 +38,6 @@
 
 		window.onload = function() {
 			inicialitza();
-			dibuixaMapa();
 			gameLoop();
 		}
 
@@ -93,10 +92,6 @@
 			mapes.mapa(mapa).dibuixaPilotes();
 		}
 
-		function dibuixaMapa() {
-			mapes.mapa(mapa).dibuixa();
-		}
-
 		function drawCircle(centerX, centerY, radius, color) {
 		    ctxp.fillStyle = color;
 		    ctxp.beginPath();
@@ -115,13 +110,6 @@
 				//es necessita el onload pq si no a vegades s'executa el drawImage() sense que es carregui
 				//la imatge i llavors no surt res pq no es torna a cridar drawImage()
 			}
-			{//mapa
-				mapaCanvas = document.getElementById('mapaCanvas');
-				ctxm = mapaCanvas.getContext('2d');
-				ctxm.fillStyle = 'black'; //aixo es del context del mapa pq vegis com NO es borra
-				ctxm.fillRect(0,0,600,600);
-				mapes = new Mapes();
-			}
 			{//Heroi
 				heroiCanvas = document.getElementById('heroiCanvas');
 				ctxh = heroiCanvas.getContext('2d');
@@ -132,7 +120,14 @@
 				pilotaCanvas = document.getElementById('pilotaCanvas');
 				ctxp = pilotaCanvas.getContext('2d');
 			}
-			mapaInicialitza(); // Esta aqui perque necessita l'heroi pero s'hauria de posar a dins del inmapa si es pogues
+			{//mapa
+				mapaCanvas = document.getElementById('mapaCanvas');
+				ctxm = mapaCanvas.getContext('2d');
+				ctxm.fillStyle = 'black'; //aixo es del context del mapa pq vegis com NO es borra
+				ctxm.fillRect(0,0,600,600);
+				mapaInicialitza();
+			}
+
 		}
 
 		function mapaInicialitza() {
@@ -143,13 +138,13 @@
 			ctxh.clearRect(0, 0, 600, 600);
 			heroi.p.x = mapes.mapa(mapa).infin[0].x + (mapes.mapa(mapa).infin[1].x/2) - MIDAQUADRAT/2;
 			heroi.p.y = mapes.mapa(mapa).infin[0].y + (mapes.mapa(mapa).infin[1].y)/2 - MIDAQUADRAT/2;
-			dibuixaMapa();
+		  mapes.mapa(mapa).dibuixa();
 			fin = false;
 		}
 
 		function final() {
 			if (heroi.p.x > mapes.mapa(mapa).infin[2].x && heroi.p.y > mapes.mapa(mapa).infin[2].y
-				&& heroi.p.x < mapes.mapa(mapa).infin[2].x + mapes.mapa(mapa).infin[3].x 
+				&& heroi.p.x < mapes.mapa(mapa).infin[2].x + mapes.mapa(mapa).infin[3].x
 				&& heroi.p.y < mapes.mapa(mapa).infin[2].y + mapes.mapa(mapa).infin[3].y) fin = true;
 
 			if (fin) {
